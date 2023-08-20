@@ -1,6 +1,7 @@
 import requests
 from datetime import datetime
 import smtplib
+import time
 
 MY_EMAIL = "pythontesting43@gmail.com"
 MY_PASSWORD = "jfckucmicckdzgsp"
@@ -40,15 +41,17 @@ def is_night():
         return True
 
 
-if is_overhead() and is_night():
-    with smtplib.SMTP("smtp.gmail.com", 587) as connection:
-        connection.starttls()
-        connection.login(user=MY_EMAIL, password=MY_PASSWORD)
-        connection.sendmail(
-            from_addr=MY_EMAIL,
-            to_addrs=MY_EMAIL,
-            msg="Subject:The ISS is above you!!/n/n Go check the ISS before it goes."
-        )
+while True:
+    time.sleep(60)
+    if is_overhead() and is_night():
+        with smtplib.SMTP("smtp.gmail.com", 587) as connection:
+            connection.starttls()
+            connection.login(user=MY_EMAIL, password=MY_PASSWORD)
+            connection.sendmail(
+                from_addr=MY_EMAIL,
+                to_addrs=MY_EMAIL,
+                msg="Subject:The ISS is above you!!/n/n Go check the ISS before it goes."
+            )
 
 
 
